@@ -1,4 +1,4 @@
-import { Component, Prop, Watch, h } from '@stencil/core';
+import { Component, Prop, State, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -6,46 +6,58 @@ export enum Loop {
 }
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
+  tag: 'type-it',
+  styleUrl: 'type-it.css',
   scoped: true,
 })
 export class MyComponent {
-  @Prop() sentences: string[];
+  @Prop() sentences?: string[];
   @Prop() loop: Loop = Loop.Infinite;
+
+  @State() exitAnimation = false;
 
   private hostReference: HTMLDivElement;
 
-  get modifiedSentences() {
-    let sentences = [...this.sentences];
-    sentences[-1] = this.hostReference.innerText;
-
-    return sentences;
+  get shouldRenderAnimation() {
+    return this.sentences && this.sentences.length;
   }
 
-  componentWillLoad() {
-    this.initializeAnimation();
+  componentDidLoad() {
+    if (this.shouldRenderAnimation) {
+      this.initializeAnimation();
+    }
   }
 
   @Watch('sentences')
   @Watch('loop')
-  private initializeAnimation() {
-    const length = this.sentences.length;
+  killLastAnimation() {
+    this.exitAnimation = true;
+
+    setTimeout(() => {
+      this.initializeAnimation();
+    });
+  }
+
+  private async initializeAnimation() {
+    let sentences = [...(this.sentences || [])];
+    sentences[-1] = this.hostReference.innerText;
+    const length = sentences.length;
 
     for (let index = 0; ; index++) {
-      let currentText = this.modifiedSentences[(index - 1) % length] || '';
-      let nextText = this.modifiedSentences[index % length];
+      let currentText = sentences[(index - 1) % length] || '';
+      let nextText = sentences[index % length];
       let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
-      this.animate(currentText, nextText, matchingIndex);
+      await this.animate(currentText, nextText, matchingIndex);
 
-      if (this.loop === Loop.Once && index % length === length - 1) {
+      if (this.exitAnimation || (this.loop === Loop.Once && index % length === length - 1)) {
+        this.exitAnimation = false;
         break;
       }
     }
   }
 
-  private animate(currentText: string, nextText: string, matchingIndex: number) {
+  private async animate(currentText: string, nextText: string, matchingIndex: number) {
     return new Promise<void>(async resolve => {
       await this.deleteAnimation(currentText, matchingIndex);
       await this.addAnimation(nextText, matchingIndex);
