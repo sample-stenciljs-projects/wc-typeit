@@ -116,7 +116,7 @@ export class MyComponent {
 
   render() {
     return (
-      <div ref={el => (this.hostReference = el)}>
+      <div class="type-it" ref={el => (this.hostReference = el)}>
         <slot></slot>
       </div>
     );

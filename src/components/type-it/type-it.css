@@ -1,3 +1,25 @@
 :host {
   all: inherit;
 }
+
+.type-it::after {
+  content: '|';
+  font-weight: bold;
+  animation: blink 1s linear infinite;
+  position: absolute;
+  transform: translate(0.1em, -0.1em);
+}
+
+@keyframes blink {
+  49% {
+    color: inherit;
+  }
+
+  50% {
+    color: transparent;
+  }
+
+  100% {
+    color: transparent;
+  }
+}
