@@ -1,4 +1,4 @@
-import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Event, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -16,7 +16,19 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
+  // @Event() onLoopComplete;
+
   private hostReference: HTMLElement;
+
+  @Method()
+  public stop() {
+    this.killAnimation();
+  }
+
+  @Method()
+  public start() {
+    this.initializeAnimation();
+  }
 
   get shouldRenderAnimation() {
     return this.sentences && this.sentences.length;
@@ -30,7 +42,7 @@ export class MyComponent {
 
   @Watch('sentences')
   @Watch('loop')
-  killLastAnimation() {
+  private killAnimation() {
     this.exitAnimation = true;
 
     setTimeout(() => {
