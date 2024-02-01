@@ -31,6 +31,19 @@ export class MyComponent {
   @Watch('loop')
   private initializeAnimation() {}
 
+  private findMatchingIndex(currentText: string, nextText: string) {
+    let index = 0;
+
+    while (
+      index < currentText.length &&
+      index < nextText.length &&
+      currentText[index] === nextText[index]
+    ) {
+      index += 1;
+    }
+    return index;
+  }
+
   render() {
     return (
       <div ref={el => (this.hostReference = el)}>
