@@ -53,7 +53,21 @@ export class MyComponent {
     });
   }
 
-  private async addAnimation(text: string, matchingIndex: number) {}
+  private async addAnimation(text: string, matchingIndex: number) {
+    return new Promise<void>(resolve => {
+      let index = matchingIndex;
+      let interval = setInterval(() => {
+        if (index === text.length) {
+          clearInterval(interval);
+          resolve();
+        } else {
+          const newText = text.slice(0, index + 1);
+          this.hostReference.innerText = newText;
+          index += 1;
+        }
+      }, 100);
+    });
+  }
 
   private async deleteAnimation(text: string, matchingIndex: number) {}
 
