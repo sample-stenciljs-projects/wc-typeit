@@ -79,7 +79,7 @@ export class MyComponent {
           this.hostReference.innerText = newText;
           index += 1;
         }
-      }, 100);
+      }, 150);
     });
   }
 
