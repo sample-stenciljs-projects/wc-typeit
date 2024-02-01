@@ -2,13 +2,26 @@
 <html dir="ltr" lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
     <title>Stencil Component Starter</title>
 
     <script type="module" src="/build/type-it.esm.js"></script>
     <script nomodule src="/build/type-it.js"></script>
   </head>
-  <body>
-    <type-it>Default text to be shown</type-it>
-  </body>
+  <body></body>
+  <script>
+    const typeitWidget = document.createElement('type-it');
+    typeitWidget.innerText = 'This is the default text to be shown';
+    //typeitWidget.loop = 'Once'
+    typeitWidget.sentences = ['This is a sample', 'It can READ', 'It can WRITE', 'It can Excel'];
+
+    document.body.appendChild(typeitWidget);
+
+    setTimeout(() => {
+typeitWidget.sentences = ['I am new now', 'I am bold', 'I am intelligent']
+    }, 5000)
+  </script>
 </html>
