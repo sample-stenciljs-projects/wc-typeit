@@ -1,5 +1,9 @@
 import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+
+export enum Loop {
+  Once = 'Once',
+  Infinite = 'Infinite',
+}
 
 @Component({
   tag: 'my-component',
@@ -7,26 +11,10 @@ import { format } from '../../utils/utils';
   shadow: true,
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
-
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
-  }
+  @Prop() sentences: string[];
+  @Prop() loop: Loop = Loop.Infinite;
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return <div>Hello, World!</div>;
   }
 }
