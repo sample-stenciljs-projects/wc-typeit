@@ -1,4 +1,4 @@
-import { Component, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -16,7 +16,7 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
-  private hostReference: HTMLDivElement;
+  private hostReference: HTMLElement;
 
   get shouldRenderAnimation() {
     return this.sentences && this.sentences.length;
@@ -116,9 +116,9 @@ export class MyComponent {
 
   render() {
     return (
-      <div class="type-it" ref={el => (this.hostReference = el)}>
+      <Host ref={el => (this.hostReference = el)}>
         <slot></slot>
-      </div>
+      </Host>
     );
   }
 }

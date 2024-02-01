@@ -1,8 +1,4 @@
-:host {
-  all: inherit;
-}
-
-.type-it::after {
+:host:after {
   content: '|';
   font-weight: bold;
   animation: blink 1s linear infinite;
@@ -11,15 +7,19 @@
 }
 
 @keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
   49% {
-    color: inherit;
+    opacity: 1;
   }
 
   50% {
-    color: transparent;
+    opacity: 0;
   }
 
   100% {
-    color: transparent;
+    opacity: 0;
   }
 }
