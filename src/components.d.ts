@@ -5,57 +5,39 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Loop } from "./components/type-it/type-it";
+export { Loop } from "./components/type-it/type-it";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface TypeIt {
+        "loop": Loop;
+        "sentences"?: string[];
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLTypeItElement extends Components.TypeIt, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLTypeItElement: {
+        prototype: HTMLTypeItElement;
+        new (): HTMLTypeItElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "type-it": HTMLTypeItElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface TypeIt {
+        "loop"?: Loop;
+        "sentences"?: string[];
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "type-it": TypeIt;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "type-it": LocalJSX.TypeIt & JSXBase.HTMLAttributes<HTMLTypeItElement>;
         }
     }
 }
