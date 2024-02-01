@@ -45,7 +45,17 @@ export class MyComponent {
     }
   }
 
-  private animate(currentText: string, nextText: string, matchingIndex: number) {}
+  private animate(currentText: string, nextText: string, matchingIndex: number) {
+    return new Promise<void>(async resolve => {
+      await this.deleteAnimation(currentText, matchingIndex);
+      await this.addAnimation(nextText, matchingIndex);
+      resolve();
+    });
+  }
+
+  private async addAnimation(text: string, matchingIndex: number) {}
+
+  private async deleteAnimation(text: string, matchingIndex: number) {}
 
   private findMatchingIndex(currentText: string, nextText: string) {
     let index = 0;
