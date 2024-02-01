@@ -29,7 +29,19 @@ export class MyComponent {
 
   @Watch('sentences')
   @Watch('loop')
-  private initializeAnimation() {}
+  private initializeAnimation() {
+    const length = this.sentences.length;
+
+    for (let index = 0; ; index++) {
+      let currentText = this.modifiedSentences[(index - 1) % length] || '';
+      let nextText = this.modifiedSentences[index % length];
+      let matchingIndex = this.findMatchingIndex(currentText, nextText);
+
+      this.animate(currentText, nextText, matchingIndex);
+    }
+  }
+
+  private animate(currentText: string, nextText: string, matchingIndex: number) {}
 
   private findMatchingIndex(currentText: string, nextText: string) {
     let index = 0;
