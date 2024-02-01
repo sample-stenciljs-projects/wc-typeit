@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -14,7 +14,28 @@ export class MyComponent {
   @Prop() sentences: string[];
   @Prop() loop: Loop = Loop.Infinite;
 
+  private hostReference: HTMLDivElement;
+
+  get modifiedSentences() {
+    let sentences = [...this.sentences];
+    sentences[-1] = this.hostReference.innerText;
+
+    return sentences;
+  }
+
+  componentWillLoad() {
+    this.initializeAnimation();
+  }
+
+  @Watch('sentences')
+  @Watch('loop')
+  private initializeAnimation() {}
+
   render() {
-    return <div>Hello, World!</div>;
+    return (
+      <div ref={el => (this.hostReference = el)}>
+        <slot></slot>
+      </div>
+    );
   }
 }
