@@ -59,7 +59,9 @@ export class MyComponent {
       let interval = setInterval(() => {
         if (index === text.length) {
           clearInterval(interval);
-          resolve();
+          setTimeout(() => {
+            resolve();
+          }, 500);
         } else {
           const newText = text.slice(0, index + 1);
           this.hostReference.innerText = newText;
@@ -75,7 +77,9 @@ export class MyComponent {
       let interval = setInterval(() => {
         if (index === matchingIndex) {
           clearInterval(interval);
-          resolve();
+          setTimeout(() => {
+            resolve();
+          }, 200);
         } else {
           const newText = text.slice(0, index - 1);
           this.hostReference.innerText = newText;
