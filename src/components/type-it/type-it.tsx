@@ -69,7 +69,21 @@ export class MyComponent {
     });
   }
 
-  private async deleteAnimation(text: string, matchingIndex: number) {}
+  private async deleteAnimation(text: string, matchingIndex: number) {
+    return new Promise<void>(resolve => {
+      let index = text.length;
+      let interval = setInterval(() => {
+        if (index === matchingIndex) {
+          clearInterval(interval);
+          resolve();
+        } else {
+          const newText = text.slice(0, index - 1);
+          this.hostReference.innerText = newText;
+          index -= 1;
+        }
+      }, 100);
+    });
+  }
 
   private findMatchingIndex(currentText: string, nextText: string) {
     let index = 0;
