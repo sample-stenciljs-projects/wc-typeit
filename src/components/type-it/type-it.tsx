@@ -38,6 +38,10 @@ export class MyComponent {
       let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
       this.animate(currentText, nextText, matchingIndex);
+
+      if (this.loop === Loop.Once && index % length === length - 1) {
+        break;
+      }
     }
   }
 
