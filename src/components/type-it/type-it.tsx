@@ -8,7 +8,7 @@ export enum Loop {
 @Component({
   tag: 'my-component',
   styleUrl: 'my-component.css',
-  shadow: true,
+  scoped: true,
 })
 export class MyComponent {
   @Prop() sentences: string[];
