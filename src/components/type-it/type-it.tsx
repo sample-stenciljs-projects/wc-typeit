@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, State, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -6,15 +6,119 @@ export enum Loop {
 }
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
-  shadow: true,
+  tag: 'type-it',
+  styleUrl: 'type-it.css',
+  scoped: true,
 })
 export class MyComponent {
-  @Prop() sentences: string[];
+  @Prop() sentences?: string[];
   @Prop() loop: Loop = Loop.Infinite;
 
+  @State() exitAnimation = false;
+
+  private hostReference: HTMLDivElement;
+
+  get shouldRenderAnimation() {
+    return this.sentences && this.sentences.length;
+  }
+
+  componentDidLoad() {
+    if (this.shouldRenderAnimation) {
+      this.initializeAnimation();
+    }
+  }
+
+  @Watch('sentences')
+  @Watch('loop')
+  killLastAnimation() {
+    this.exitAnimation = true;
+
+    setTimeout(() => {
+      this.initializeAnimation();
+    });
+  }
+
+  private async initializeAnimation() {
+    let sentences = [...(this.sentences || [])];
+    sentences[-1] = this.hostReference.innerText;
+    const length = sentences.length;
+
+    for (let index = 0; ; index++) {
+      let currentText = sentences[(index - 1) % length] || '';
+      let nextText = sentences[index % length];
+      let matchingIndex = this.findMatchingIndex(currentText, nextText);
+
+      await this.animate(currentText, nextText, matchingIndex);
+
+      if (this.exitAnimation || (this.loop === Loop.Once && index % length === length - 1)) {
+        this.exitAnimation = false;
+        break;
+      }
+    }
+  }
+
+  private async animate(currentText: string, nextText: string, matchingIndex: number) {
+    return new Promise<void>(async resolve => {
+      await this.deleteAnimation(currentText, matchingIndex);
+      await this.addAnimation(nextText, matchingIndex);
+      resolve();
+    });
+  }
+
+  private async addAnimation(text: string, matchingIndex: number) {
+    return new Promise<void>(resolve => {
+      let index = matchingIndex;
+      let interval = setInterval(() => {
+        if (index === text.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            resolve();
+          }, 500);
+        } else {
+          const newText = text.slice(0, index + 1);
+          this.hostReference.innerText = newText;
+          index += 1;
+        }
+      }, 100);
+    });
+  }
+
+  private async deleteAnimation(text: string, matchingIndex: number) {
+    return new Promise<void>(resolve => {
+      let index = text.length;
+      let interval = setInterval(() => {
+        if (index === matchingIndex) {
+          clearInterval(interval);
+          setTimeout(() => {
+            resolve();
+          }, 200);
+        } else {
+          const newText = text.slice(0, index - 1);
+          this.hostReference.innerText = newText;
+          index -= 1;
+        }
+      }, 100);
+    });
+  }
+
+  private findMatchingIndex(currentText: string, nextText: string) {
+    let index = 0;
+
+    while (
+      index < currentText.length &&
+      index < nextText.length &&
+      currentText[index] === nextText[index]
+    ) {
+      index += 1;
+    }
+    return index;
+  }
+
   render() {
-    return <div>Hello, World!</div>;
+    return (
+      <div ref={el => (this.hostReference = el)}>
+        <slot></slot>
+      </div>
+    );
   }
 }
