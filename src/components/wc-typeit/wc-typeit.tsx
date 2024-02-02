@@ -10,13 +10,13 @@ export enum Loop {
   styleUrl: 'wc-typeit.css',
   scoped: true,
 })
-export class MyComponent {
+export class WCTypeit {
   @Prop() sentences: string[];
   @Prop() loop: Loop = Loop.Infinite;
 
   @State() exitAnimation = false;
 
-  @Event() onAnimationStop: EventEmitter<void>;
+  @Event() animationStop: EventEmitter<void>;
 
   @Method()
   public start() {
@@ -38,7 +38,7 @@ export class MyComponent {
         reject('Animation is already stopped');
       }
       this.hostReference.addEventListener(
-        'onAnimationStop',
+        'animationStop',
         () => {
           resolve('Animation has stopped');
         },
@@ -76,7 +76,7 @@ export class MyComponent {
         this.index += 1;
 
         if (this.shouldExitAnimation()) {
-          this.onAnimationStop.emit();
+          this.animationStop.emit();
           break;
         }
       }
