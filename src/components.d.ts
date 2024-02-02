@@ -12,7 +12,7 @@ export namespace Components {
         "loop": Loop;
         "sentences": string[];
         "start": () => Promise<string>;
-        "stop": () => Promise<void>;
+        "stop": () => Promise<string>;
     }
 }
 export interface TypeItCustomEvent<T> extends CustomEvent<T> {

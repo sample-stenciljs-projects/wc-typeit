@@ -33,11 +33,14 @@ export class MyComponent {
 
   @Method()
   public stop() {
-    return new Promise<void>(resolve => {
+    return new Promise<string>((resolve, reject) => {
+      if (this.exitAnimation) {
+        reject('Animation is already stopped');
+      }
       this.hostReference.addEventListener(
         'onAnimationStop',
         () => {
-          resolve();
+          resolve('Animation has stopped');
         },
         { once: true },
       );
