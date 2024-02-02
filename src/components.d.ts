@@ -21,7 +21,8 @@ export interface TypeItCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLTypeItElementEventMap {
-        "onAnimationStop": void;
+        "animationStopped": void;
+        "animationLoopEnd": void;
     }
     interface HTMLTypeItElement extends Components.TypeIt, HTMLStencilElement {
         addEventListener<K extends keyof HTMLTypeItElementEventMap>(type: K, listener: (this: HTMLTypeItElement, ev: TypeItCustomEvent<HTMLTypeItElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -44,7 +45,8 @@ declare global {
 declare namespace LocalJSX {
     interface TypeIt {
         "loop"?: Loop;
-        "onOnAnimationStop"?: (event: TypeItCustomEvent<void>) => void;
+        "onAnimationLoopEnd"?: (event: TypeItCustomEvent<void>) => void;
+        "onAnimationStopped"?: (event: TypeItCustomEvent<void>) => void;
         "sentences"?: string[];
     }
     interface IntrinsicElements {

@@ -16,7 +16,8 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
-  @Event() onAnimationStop: EventEmitter<void>;
+  @Event() animationStop: EventEmitter<void>;
+  @Event() animationLoopEnd: EventEmitter<void>;
 
   @Method()
   public start() {
@@ -38,7 +39,7 @@ export class MyComponent {
         reject('Animation is already stopped');
       }
       this.hostReference.addEventListener(
-        'onAnimationStop',
+        'animationStop',
         () => {
           resolve('Animation has stopped');
         },
@@ -53,6 +54,10 @@ export class MyComponent {
 
   get shouldRenderAnimation() {
     return this.sentences && this.sentences.length && this.sentences.every(sentence => !!sentence);
+  }
+
+  get isEndOfLoop() {
+    return !(this.index % this.sentences.length);
   }
 
   componentDidLoad() {
@@ -75,8 +80,12 @@ export class MyComponent {
 
         this.index += 1;
 
-        if (this.shouldExitAnimation()) {
-          this.onAnimationStop.emit();
+        if (this.isEndOfLoop) {
+          this.animationLoopEnd.emit();
+        }
+
+        if (this.shouldEndAnimation()) {
+          this.animationStop.emit();
           break;
         }
       }
@@ -129,8 +138,8 @@ export class MyComponent {
     });
   }
 
-  private shouldExitAnimation() {
-    return this.exitAnimation || (this.loop === Loop.Once && !(this.index % this.sentences.length));
+  private shouldEndAnimation() {
+    return this.exitAnimation || (this.loop === Loop.Once && this.isEndOfLoop);
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {
