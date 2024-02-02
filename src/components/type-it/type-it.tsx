@@ -37,9 +37,7 @@ export class MyComponent {
   }
 
   componentDidLoad() {
-    if (this.shouldRenderAnimation) {
-      this.startAnimation();
-    }
+    this.startAnimation();
   }
 
   private killAnimation() {
@@ -47,9 +45,8 @@ export class MyComponent {
   }
 
   private async startAnimation() {
-    let sentences = [...(this.sentences || [])];
-    sentences[-1] = this.hostReference.innerText;
-    const length = sentences.length;
+    if (this.shouldRenderAnimation) {
+      const sentenceCount = this.sentences.length;
 
     for (; ; this.index++) {
       let currentText = sentences[(this.index - 1) % length] || '';
