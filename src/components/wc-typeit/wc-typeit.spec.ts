@@ -1,10 +1,10 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { MyComponent } from './wc-typeit';
+import { WCTypeit } from './wc-typeit';
 
 describe('wc-typeit', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [MyComponent],
+      components: [WCTypeit],
       html: '<wc-typeit></wc-typeit>',
     });
     expect(root).toEqualHtml(`
@@ -20,7 +20,7 @@ describe('wc-typeit', () => {
 
   it('renders with values', async () => {
     const { root } = await newSpecPage({
-      components: [MyComponent],
+      components: [WCTypeit],
       html: `<wc-typeit first="Stencil" last="'Don't call me a framework' JS"></wc-typeit>`,
     });
     expect(root).toEqualHtml(`

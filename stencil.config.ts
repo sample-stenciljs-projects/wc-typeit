@@ -1,14 +1,17 @@
 import { Config } from '@stencil/core';
+import { distDirs } from './package.json';
 
 export const config: Config = {
   namespace: 'wc-typeit',
   outputTargets: [
     {
       type: 'dist',
+      dir: distDirs.stencil,
       esmLoaderPath: '../loader',
     },
     {
       type: 'dist-custom-elements',
+      dir: distDirs.stencil,
     },
     {
       type: 'docs-readme',
@@ -19,6 +22,6 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: "new",
+    browserHeadless: 'new',
   },
 };
