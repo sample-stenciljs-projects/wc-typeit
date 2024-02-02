@@ -11,7 +11,7 @@ export namespace Components {
     interface TypeIt {
         "loop": Loop;
         "sentences": string[];
-        "start": () => Promise<void>;
+        "start": () => Promise<string>;
         "stop": () => Promise<void>;
     }
 }

@@ -18,10 +18,15 @@ export class MyComponent {
 
   @Method()
   public start() {
-    if (this.exitAnimation) {
-      this.exitAnimation = false;
-      this.startAnimation();
-    }
+    return new Promise<string>((resolve, reject) => {
+      if (this.exitAnimation) {
+        this.exitAnimation = false;
+        this.startAnimation();
+        resolve('Animation has begun');
+      } else {
+        reject('Animation is already running');
+      }
+    });
   }
 
   @Method()
