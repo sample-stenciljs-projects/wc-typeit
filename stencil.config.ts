@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'type-it',
+  namespace: 'wc-typeit',
   outputTargets: [
     {
       type: 'dist',

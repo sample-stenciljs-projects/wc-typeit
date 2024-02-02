@@ -6,8 +6,8 @@ export enum Loop {
 }
 
 @Component({
-  tag: 'type-it',
-  styleUrl: 'type-it.css',
+  tag: 'wc-typeit',
+  styleUrl: 'wc-typeit.css',
   scoped: true,
 })
 export class MyComponent {

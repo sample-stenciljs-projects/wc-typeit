@@ -5,57 +5,57 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Loop } from "./components/type-it/type-it";
-export { Loop } from "./components/type-it/type-it";
+import { Loop } from "./components/wc-typeit/wc-typeit";
+export { Loop } from "./components/wc-typeit/wc-typeit";
 export namespace Components {
-    interface TypeIt {
+    interface WcTypeit {
         "loop": Loop;
         "sentences": string[];
         "start": () => Promise<string>;
         "stop": () => Promise<string>;
     }
 }
-export interface TypeItCustomEvent<T> extends CustomEvent<T> {
+export interface WcTypeitCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLTypeItElement;
+    target: HTMLWcTypeitElement;
 }
 declare global {
-    interface HTMLTypeItElementEventMap {
+    interface HTMLWcTypeitElementEventMap {
         "onAnimationStop": void;
     }
-    interface HTMLTypeItElement extends Components.TypeIt, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLTypeItElementEventMap>(type: K, listener: (this: HTMLTypeItElement, ev: TypeItCustomEvent<HTMLTypeItElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLWcTypeitElement extends Components.WcTypeit, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLWcTypeitElementEventMap>(type: K, listener: (this: HTMLWcTypeitElement, ev: WcTypeitCustomEvent<HTMLWcTypeitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLTypeItElementEventMap>(type: K, listener: (this: HTMLTypeItElement, ev: TypeItCustomEvent<HTMLTypeItElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLWcTypeitElementEventMap>(type: K, listener: (this: HTMLWcTypeitElement, ev: WcTypeitCustomEvent<HTMLWcTypeitElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLTypeItElement: {
-        prototype: HTMLTypeItElement;
-        new (): HTMLTypeItElement;
+    var HTMLWcTypeitElement: {
+        prototype: HTMLWcTypeitElement;
+        new (): HTMLWcTypeitElement;
     };
     interface HTMLElementTagNameMap {
-        "type-it": HTMLTypeItElement;
+        "wc-typeit": HTMLWcTypeitElement;
     }
 }
 declare namespace LocalJSX {
-    interface TypeIt {
+    interface WcTypeit {
         "loop"?: Loop;
-        "onOnAnimationStop"?: (event: TypeItCustomEvent<void>) => void;
+        "onOnAnimationStop"?: (event: WcTypeitCustomEvent<void>) => void;
         "sentences"?: string[];
     }
     interface IntrinsicElements {
-        "type-it": TypeIt;
+        "wc-typeit": WcTypeit;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "type-it": LocalJSX.TypeIt & JSXBase.HTMLAttributes<HTMLTypeItElement>;
+            "wc-typeit": LocalJSX.WcTypeit & JSXBase.HTMLAttributes<HTMLWcTypeitElement>;
         }
     }
 }

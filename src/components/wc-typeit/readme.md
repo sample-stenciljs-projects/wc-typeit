@@ -1,4 +1,4 @@
-# type-it
+# wc-typeit
 
 
 
@@ -11,6 +11,36 @@
 | ----------- | --------- | ----------- | ---------------------------- | --------------- |
 | `loop`      | `loop`    |             | `Loop.Infinite \| Loop.Once` | `Loop.Infinite` |
 | `sentences` | --        |             | `string[]`                   | `undefined`     |
+
+
+## Events
+
+| Event             | Description | Type                |
+| ----------------- | ----------- | ------------------- |
+| `onAnimationStop` |             | `CustomEvent<void>` |
+
+
+## Methods
+
+### `start() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
+### `stop() => Promise<string>`
+
+
+
+#### Returns
+
+Type: `Promise<string>`
+
+
 
 
 ----------------------------------------------

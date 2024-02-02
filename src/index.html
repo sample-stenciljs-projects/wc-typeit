@@ -8,10 +8,10 @@
     />
     <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/type-it.esm.js"></script>
-    <script nomodule src="/build/type-it.js"></script>
+    <script type="module" src="/build/wc-typeit.esm.js"></script>
+    <script nomodule src="/build/wc-typeit.js"></script>
     <style>
-      type-it {
+      wc-typeit {
         color: maroon;
         display: block;
         font-size: 2rem;
@@ -19,7 +19,7 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
-      type-it::after {
+      wc-typeit::after {
         color: black;
       }
     </style>
@@ -28,15 +28,20 @@
     <div></div>
   </body>
   <script>
-    const typeitWidget = document.createElement('type-it');
+    const typeitWidget = document.createElement('wc-typeit');
     typeitWidget.innerText = 'This is the default text to be shown';
-     typeitWidget.loop = 'Once'
+    // typeitWidget.loop = 'Once'
     typeitWidget.sentences = ['This is a sample', 'It can READ', 'It can WRITE', 'It can Excel'];
 
-    document.querySelector('div').appendChild(typeitWidget);
+    typeitWidget.addEventListener('animationLoopEnd', () => {
+      console.log('animationLoopEnd');
+      typeitWidget.stop();
+    });
 
     // setTimeout(() => {
     //   typeitWidget.sentences = ['I am new now', 'I am bold', 'I am intelligent'];
     // }, 5000);
+
+    document.querySelector('div').appendChild(typeitWidget);
   </script>
 </html>
