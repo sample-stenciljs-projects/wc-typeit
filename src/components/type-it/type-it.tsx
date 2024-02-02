@@ -78,6 +78,7 @@ export class MyComponent {
       await this.animate(currentText, nextText, matchingIndex);
 
       if (this.shouldExitAnimation()) {
+        this.index += 1;
         break;
       }
     }
