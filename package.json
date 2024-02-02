@@ -12,7 +12,7 @@
   "unpkg": "dist/wc-typeit/wc-typeit.esm.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/stencil-component-starter.git"
+    "url": "git@github.com:sample-stenciljs-projects/wc-typeit.git"
   },
   "distDirs": {
     "stencil": "dist"
