@@ -62,6 +62,8 @@ export class MyComponent {
           break;
         }
       }
+    } else {
+      throw new Error('Cannot initiate typewriting effect as the sentences are in invalid format!');
     }
   }
 
