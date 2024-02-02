@@ -1,4 +1,4 @@
-import { Component, Host, Method, Prop, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, Method, Prop, State, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -16,17 +16,36 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
+  @Event() onAnimationStop: EventEmitter<void>;
+
   @Method()
   public start() {
-    if (this.exitAnimation) {
-      this.exitAnimation = false;
-      this.startAnimation();
-    }
+    return new Promise<string>((resolve, reject) => {
+      if (this.exitAnimation) {
+        this.exitAnimation = false;
+        this.startAnimation();
+        resolve('Animation has begun');
+      } else {
+        reject('Animation is already running');
+      }
+    });
   }
 
   @Method()
   public stop() {
-    this.killAnimation();
+    return new Promise<string>((resolve, reject) => {
+      if (this.exitAnimation) {
+        reject('Animation is already stopped');
+      }
+      this.hostReference.addEventListener(
+        'onAnimationStop',
+        () => {
+          resolve('Animation has stopped');
+        },
+        { once: true },
+      );
+      this.killAnimation();
+    });
   }
 
   private hostReference: HTMLElement;
@@ -57,6 +76,7 @@ export class MyComponent {
         this.index += 1;
 
         if (this.shouldExitAnimation()) {
+          this.onAnimationStop.emit();
           break;
         }
       }
