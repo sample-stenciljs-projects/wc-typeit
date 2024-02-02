@@ -19,6 +19,7 @@ export class MyComponent {
   // @Event() onLoopComplete;
 
   private hostReference: HTMLElement;
+  private index = 0;
 
   @Method()
   public stop() {
@@ -55,14 +56,14 @@ export class MyComponent {
     sentences[-1] = this.hostReference.innerText;
     const length = sentences.length;
 
-    for (let index = 0; ; index++) {
-      let currentText = sentences[(index - 1) % length] || '';
-      let nextText = sentences[index % length];
+    for (; ; this.index++) {
+      let currentText = sentences[(this.index - 1) % length] || '';
+      let nextText = sentences[this.index % length];
       let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
       await this.animate(currentText, nextText, matchingIndex);
 
-      if (this.exitAnimation || (this.loop === Loop.Once && index % length === length - 1)) {
+      if (this.exitAnimation || (this.loop === Loop.Once && this.index % length === length - 1)) {
         this.exitAnimation = false;
         break;
       }
