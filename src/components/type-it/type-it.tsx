@@ -46,12 +46,10 @@ export class MyComponent {
 
   private async startAnimation() {
     if (this.shouldRenderAnimation) {
-      const sentenceCount = this.sentences.length;
-
       while (true) {
         let currentText =
-          this.sentences[(this.index - 1) % sentenceCount] || this.hostReference.innerText;
-        let nextText = this.sentences[this.index % sentenceCount];
+          this.sentences[(this.index - 1) % this.sentences.length] || this.hostReference.innerText;
+        let nextText = this.sentences[this.index % this.sentences.length];
         let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
         await this.animate(currentText, nextText, matchingIndex);
