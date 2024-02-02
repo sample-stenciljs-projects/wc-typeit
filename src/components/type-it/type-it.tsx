@@ -110,10 +110,7 @@ export class MyComponent {
   }
 
   private shouldExitAnimation() {
-    return (
-      this.exitAnimation ||
-      (this.loop === Loop.Once && this.index % length === this.sentences.length - 1)
-    );
+    return this.exitAnimation || (this.loop === Loop.Once && !(this.index % this.sentences.length));
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {
