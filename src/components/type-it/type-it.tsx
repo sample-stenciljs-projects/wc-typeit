@@ -28,8 +28,10 @@ export class MyComponent {
 
   @Method()
   public start() {
-    this.exitAnimation = false;
-    this.startAnimation();
+    if (this.exitAnimation) {
+      this.exitAnimation = false;
+      this.startAnimation();
+    }
   }
 
   @Method()
