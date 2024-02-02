@@ -84,7 +84,9 @@ export class MyComponent {
           this.animationLoopEnd.emit();
         }
 
-        if (this.shouldEndAnimation()) {
+        const shouldEndAnimation = await this.shouldEndAnimation();
+
+        if (shouldEndAnimation) {
           this.animationStop.emit();
           break;
         }
@@ -139,7 +141,11 @@ export class MyComponent {
   }
 
   private shouldEndAnimation() {
-    return this.exitAnimation || (this.loop === Loop.Once && this.isEndOfLoop);
+    return new Promise<boolean>(resolve => {
+      setTimeout(() => {
+        resolve(this.exitAnimation || (this.loop === Loop.Once && this.isEndOfLoop));
+      });
+    });
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {
