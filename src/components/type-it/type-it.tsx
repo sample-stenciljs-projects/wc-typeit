@@ -33,7 +33,7 @@ export class MyComponent {
   private index = 0;
 
   get shouldRenderAnimation() {
-    return this.sentences && this.sentences.length;
+    return this.sentences && this.sentences.length && this.sentences.every(sentence => !!sentence);
   }
 
   componentDidLoad() {
