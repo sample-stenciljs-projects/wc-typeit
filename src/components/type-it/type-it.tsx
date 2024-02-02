@@ -1,4 +1,4 @@
-import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Host, Method, Prop, State, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -11,49 +11,57 @@ export enum Loop {
   scoped: true,
 })
 export class MyComponent {
-  @Prop() sentences?: string[];
+  @Prop() sentences: string[];
   @Prop() loop: Loop = Loop.Infinite;
 
   @State() exitAnimation = false;
 
-  private hostReference: HTMLElement;
-
-  get shouldRenderAnimation() {
-    return this.sentences && this.sentences.length;
-  }
-
-  componentDidLoad() {
-    if (this.shouldRenderAnimation) {
-      this.initializeAnimation();
+  @Method()
+  public start() {
+    if (this.exitAnimation) {
+      this.exitAnimation = false;
+      this.startAnimation();
     }
   }
 
-  @Watch('sentences')
-  @Watch('loop')
-  killLastAnimation() {
-    this.exitAnimation = true;
-
-    setTimeout(() => {
-      this.initializeAnimation();
-    });
+  @Method()
+  public stop() {
+    this.killAnimation();
   }
 
-  private async initializeAnimation() {
-    let sentences = [...(this.sentences || [])];
-    sentences[-1] = this.hostReference.innerText;
-    const length = sentences.length;
+  private hostReference: HTMLElement;
+  private index = 0;
 
-    for (let index = 0; ; index++) {
-      let currentText = sentences[(index - 1) % length] || '';
-      let nextText = sentences[index % length];
-      let matchingIndex = this.findMatchingIndex(currentText, nextText);
+  get shouldRenderAnimation() {
+    return this.sentences && this.sentences.length && this.sentences.every(sentence => !!sentence);
+  }
 
-      await this.animate(currentText, nextText, matchingIndex);
+  componentDidLoad() {
+    this.startAnimation();
+  }
 
-      if (this.exitAnimation || (this.loop === Loop.Once && index % length === length - 1)) {
-        this.exitAnimation = false;
-        break;
+  private killAnimation() {
+    this.exitAnimation = true;
+  }
+
+  private async startAnimation() {
+    if (this.shouldRenderAnimation) {
+      while (true) {
+        let currentText =
+          this.sentences[(this.index - 1) % this.sentences.length] || this.hostReference.innerText;
+        let nextText = this.sentences[this.index % this.sentences.length];
+        let matchingIndex = this.findMatchingIndex(currentText, nextText);
+
+        await this.animate(currentText, nextText, matchingIndex);
+
+        this.index += 1;
+
+        if (this.shouldExitAnimation()) {
+          break;
+        }
       }
+    } else {
+      throw new Error('Cannot initiate typewriting effect as the sentences are in invalid format!');
     }
   }
 
@@ -99,6 +107,10 @@ export class MyComponent {
         }
       }, 100);
     });
+  }
+
+  private shouldExitAnimation() {
+    return this.exitAnimation || (this.loop === Loop.Once && !(this.index % this.sentences.length));
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {

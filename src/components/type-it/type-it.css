@@ -3,7 +3,7 @@
   font-weight: bold;
   animation: blink 1s linear infinite;
   position: absolute;
-  transform: translate(0.1em, -0.1em);
+  transform: translateY(-0.1em);
 }
 
 @keyframes blink {
