@@ -21,7 +21,7 @@ export interface WcTypeitCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLWcTypeitElementEventMap {
-        "onAnimationStop": void;
+        "animationStop": void;
     }
     interface HTMLWcTypeitElement extends Components.WcTypeit, HTMLStencilElement {
         addEventListener<K extends keyof HTMLWcTypeitElementEventMap>(type: K, listener: (this: HTMLWcTypeitElement, ev: WcTypeitCustomEvent<HTMLWcTypeitElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -44,7 +44,7 @@ declare global {
 declare namespace LocalJSX {
     interface WcTypeit {
         "loop"?: Loop;
-        "onOnAnimationStop"?: (event: WcTypeitCustomEvent<void>) => void;
+        "onAnimationStop"?: (event: WcTypeitCustomEvent<void>) => void;
         "sentences"?: string[];
     }
     interface IntrinsicElements {

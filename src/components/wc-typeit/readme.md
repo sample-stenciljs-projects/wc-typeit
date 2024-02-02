@@ -15,9 +15,9 @@
 
 ## Events
 
-| Event             | Description | Type                |
-| ----------------- | ----------- | ------------------- |
-| `onAnimationStop` |             | `CustomEvent<void>` |
+| Event           | Description | Type                |
+| --------------- | ----------- | ------------------- |
+| `animationStop` |             | `CustomEvent<void>` |
 
 
 ## Methods
