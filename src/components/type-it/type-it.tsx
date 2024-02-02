@@ -1,4 +1,4 @@
-import { Component, Event, Host, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Host, Method, Prop, State, Watch, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -16,11 +16,6 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
-  // @Event() onLoopComplete;
-
-  private hostReference: HTMLElement;
-  private index = 0;
-
   @Method()
   public stop() {
     this.killAnimation();
@@ -28,8 +23,21 @@ export class MyComponent {
 
   @Method()
   public start() {
+    this.exitAnimation = false;
     this.initializeAnimation();
   }
+
+  @Watch('sentences')
+  reloadAnimation() {
+    this.killAnimation();
+
+    setTimeout(() => {
+      this.initializeAnimation();
+    });
+  }
+
+  private hostReference: HTMLElement;
+  private index = 0;
 
   get shouldRenderAnimation() {
     return this.sentences && this.sentences.length;
@@ -41,14 +49,8 @@ export class MyComponent {
     }
   }
 
-  @Watch('sentences')
-  @Watch('loop')
   private killAnimation() {
     this.exitAnimation = true;
-
-    setTimeout(() => {
-      this.initializeAnimation();
-    });
   }
 
   private async initializeAnimation() {
@@ -63,8 +65,7 @@ export class MyComponent {
 
       await this.animate(currentText, nextText, matchingIndex);
 
-      if (this.exitAnimation || (this.loop === Loop.Once && this.index % length === length - 1)) {
-        this.exitAnimation = false;
+      if (this.shouldExitAnimation()) {
         break;
       }
     }
@@ -82,7 +83,7 @@ export class MyComponent {
     return new Promise<void>(resolve => {
       let index = matchingIndex;
       let interval = setInterval(() => {
-        if (index === text.length) {
+        if (index === text.length || this.exitAnimation) {
           clearInterval(interval);
           setTimeout(() => {
             resolve();
@@ -100,7 +101,7 @@ export class MyComponent {
     return new Promise<void>(resolve => {
       let index = text.length;
       let interval = setInterval(() => {
-        if (index === matchingIndex) {
+        if (index === matchingIndex || this.exitAnimation) {
           clearInterval(interval);
           setTimeout(() => {
             resolve();
@@ -112,6 +113,10 @@ export class MyComponent {
         }
       }, 100);
     });
+  }
+
+  private shouldExitAnimation() {
+    return this.exitAnimation || (this.loop === Loop.Once && this.index % length === length - 1);
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {
