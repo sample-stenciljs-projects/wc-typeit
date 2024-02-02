@@ -1,4 +1,4 @@
-import { Component, Host, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Host, Method, Prop, State, h } from '@stencil/core';
 
 export enum Loop {
   Once = 'Once',
@@ -16,25 +16,35 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
+  // @Method()
+  // public pause() {
+  //   //this.killAnimation();
+  // }
+
+  // @Method()
+  // public resume() {
+  //   //this.killAnimation();
+  // }
+
+  @Method()
+  public start() {
+    this.exitAnimation = false;
+    this.startAnimation();
+  }
+
   @Method()
   public stop() {
     this.killAnimation();
   }
 
-  @Method()
-  public start() {
-    this.exitAnimation = false;
-    this.initializeAnimation();
-  }
+  // @Watch('sentences')
+  // reloadAnimation() {
+  //   this.killAnimation();
 
-  @Watch('sentences')
-  reloadAnimation() {
-    this.killAnimation();
-
-    setTimeout(() => {
-      this.initializeAnimation();
-    });
-  }
+  //   setTimeout(() => {
+  //     this.startAnimation();
+  //   });
+  // }
 
   private hostReference: HTMLElement;
   private index = 0;
@@ -45,7 +55,7 @@ export class MyComponent {
 
   componentDidLoad() {
     if (this.shouldRenderAnimation) {
-      this.initializeAnimation();
+      this.startAnimation();
     }
   }
 
@@ -53,7 +63,7 @@ export class MyComponent {
     this.exitAnimation = true;
   }
 
-  private async initializeAnimation() {
+  private async startAnimation() {
     let sentences = [...(this.sentences || [])];
     sentences[-1] = this.hostReference.innerText;
     const length = sentences.length;
@@ -83,7 +93,7 @@ export class MyComponent {
     return new Promise<void>(resolve => {
       let index = matchingIndex;
       let interval = setInterval(() => {
-        if (index === text.length || this.exitAnimation) {
+        if (index === text.length) {
           clearInterval(interval);
           setTimeout(() => {
             resolve();
@@ -101,7 +111,7 @@ export class MyComponent {
     return new Promise<void>(resolve => {
       let index = text.length;
       let interval = setInterval(() => {
-        if (index === matchingIndex || this.exitAnimation) {
+        if (index === matchingIndex) {
           clearInterval(interval);
           setTimeout(() => {
             resolve();
@@ -116,7 +126,10 @@ export class MyComponent {
   }
 
   private shouldExitAnimation() {
-    return this.exitAnimation || (this.loop === Loop.Once && this.index % length === length - 1);
+    return (
+      this.exitAnimation ||
+      (this.loop === Loop.Once && this.index % length === this.sentences.length - 1)
+    );
   }
 
   private findMatchingIndex(currentText: string, nextText: string) {
