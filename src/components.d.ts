@@ -10,7 +10,7 @@ export { Loop } from "./components/type-it/type-it";
 export namespace Components {
     interface TypeIt {
         "loop": Loop;
-        "sentences"?: string[];
+        "sentences": string[];
         "start": () => Promise<void>;
         "stop": () => Promise<void>;
     }

@@ -11,7 +11,7 @@ export enum Loop {
   scoped: true,
 })
 export class MyComponent {
-  @Prop() sentences?: string[];
+  @Prop() sentences: string[];
   @Prop() loop: Loop = Loop.Infinite;
 
   @State() exitAnimation = false;
