@@ -48,16 +48,19 @@ export class MyComponent {
     if (this.shouldRenderAnimation) {
       const sentenceCount = this.sentences.length;
 
-    for (; ; this.index++) {
-      let currentText = sentences[(this.index - 1) % length] || '';
-      let nextText = sentences[this.index % length];
-      let matchingIndex = this.findMatchingIndex(currentText, nextText);
+      while (true) {
+        let currentText =
+          this.sentences[(this.index - 1) % sentenceCount] || this.hostReference.innerText;
+        let nextText = this.sentences[this.index % sentenceCount];
+        let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
-      await this.animate(currentText, nextText, matchingIndex);
+        await this.animate(currentText, nextText, matchingIndex);
 
-      if (this.shouldExitAnimation()) {
         this.index += 1;
-        break;
+
+        if (this.shouldExitAnimation()) {
+          break;
+        }
       }
     }
   }
