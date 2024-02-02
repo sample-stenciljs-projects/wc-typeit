@@ -16,16 +16,6 @@ export class MyComponent {
 
   @State() exitAnimation = false;
 
-  // @Method()
-  // public pause() {
-  //   //this.killAnimation();
-  // }
-
-  // @Method()
-  // public resume() {
-  //   //this.killAnimation();
-  // }
-
   @Method()
   public start() {
     if (this.exitAnimation) {
@@ -38,15 +28,6 @@ export class MyComponent {
   public stop() {
     this.killAnimation();
   }
-
-  // @Watch('sentences')
-  // reloadAnimation() {
-  //   this.killAnimation();
-
-  //   setTimeout(() => {
-  //     this.startAnimation();
-  //   });
-  // }
 
   private hostReference: HTMLElement;
   private index = 0;
