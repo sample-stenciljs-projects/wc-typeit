@@ -1,1 +1,1 @@
-export * from './components/wc-typeit/wc-typeit';
+export * from './components';
