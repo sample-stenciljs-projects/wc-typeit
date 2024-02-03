@@ -1,9 +1,12 @@
 :host:after {
-  content: '|';
-  font-weight: bold;
   animation: blink 1s linear infinite;
+  content: '';
   position: absolute;
-  transform: translateY(-0.1em);
+  transform: translateY(0.05em);
+  width: 0.1em;
+  height: 1em;
+  background-color: black;
+  display: inline-block;
 }
 
 @keyframes blink {
