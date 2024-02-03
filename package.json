@@ -1,6 +1,6 @@
 {
   "name": "wc-typeit",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "A native web component build using StencilJs to implement typing effect",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -13,9 +13,6 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:sample-stenciljs-projects/wc-typeit.git"
-  },
-  "distDirs": {
-    "stencil": "dist"
   },
   "files": [
     "dist/",
