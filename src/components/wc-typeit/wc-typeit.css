@@ -1,3 +1,7 @@
+:host {
+  --cursor-color: #000000;
+}
+
 :host:after {
   animation: blink 1s linear infinite;
   content: '';
@@ -5,7 +9,7 @@
   transform: translateY(0.05em);
   width: 0.1em;
   height: 1em;
-  background-color: black;
+  background-color: var(--cursor-color);
   display: inline-block;
 }
 
