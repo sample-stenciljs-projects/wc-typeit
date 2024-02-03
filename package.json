@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git@github.com:sample-stenciljs-projects/wc-typeit.git"
   },
-  "distDirs": {
-    "stencil": "dist"
-  },
   "files": [
     "dist/",
     "loader/"
