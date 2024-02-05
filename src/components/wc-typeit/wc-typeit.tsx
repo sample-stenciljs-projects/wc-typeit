@@ -67,7 +67,10 @@ export class WCTypeit {
     if (this.shouldRenderAnimation) {
       while (true) {
         let currentText =
-          this.sentences[(this.index - 1) % this.sentences.length] || this.hostReference.innerText;
+          this.index === 0
+            ? this.hostReference.innerText || ''
+            : this.sentences[(this.index - 1) % this.sentences.length];
+
         let nextText = this.sentences[this.index % this.sentences.length];
         let matchingIndex = this.findMatchingIndex(currentText, nextText);
 
