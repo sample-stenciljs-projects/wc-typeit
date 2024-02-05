@@ -1,6 +1,6 @@
 # Type It!
 
-[](demo.gif)
+![](demo.gif)
 
 A very intelligent typewriter efect plug-in which can loop through an array of sentences to render them as typewriter effect. It is smart enough to delete only necessessary characters instead of deleting all before rendering the next sentence.
 
