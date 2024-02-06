@@ -16,6 +16,7 @@ export class WCTypeit {
 
   @State() exitAnimation = false;
 
+  @Event() animationLoopEnd: EventEmitter<void>;
   @Event() animationStop: EventEmitter<void>;
 
   @Method()
@@ -92,6 +93,7 @@ export class WCTypeit {
     return new Promise<void>(async resolve => {
       await this.deleteAnimation(currentText, matchingIndex);
       await this.addAnimation(nextText, matchingIndex);
+      this.emitAnimationLoopEndEvent();
       resolve();
     });
   }
@@ -130,6 +132,12 @@ export class WCTypeit {
         }
       }, 100);
     });
+  }
+
+  private emitAnimationLoopEndEvent() {
+    if (!((this.index + 1) % this.sentences.length)) {
+      this.animationLoopEnd.emit();
+    }
   }
 
   private shouldExitAnimation() {
