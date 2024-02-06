@@ -21,8 +21,7 @@ yarn add wc-typeit
 ### CDN
 
 ```html
-<script type="module" src="https://unpkg.com/wc-typeit@1.0.9/dist/wc-typeit/wc-typeit.esm.js"></script>
-<script nomodule src="https://unpkg.com/wc-typeit@1.0.9/dist/wc-typeit/wc-typeit.js"></script>
+<script type="module" src="https://unpkg.com/wc-typeit@latest/dist/wc-typeit/wc-typeit.esm.js"></script>
 ```
 
 ## Options
