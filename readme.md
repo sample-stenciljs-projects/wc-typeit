@@ -88,5 +88,19 @@ private async stopAnimation() {
 <wc-typeit sentences={sentences} loop={Loop.Once} ref={elem => this.ref = elem}>
     Default text which shows up during loading...
 </wc-typeit>
+```
 
+### Listeners
+
+You can listen to `animationLoopEnd` method which fires whenever an animation loop showing all the sentences ends
+
+```shell
+private handleAnimationLoopEnd() {
+    // your custom logic
+}
+.
+.
+<wc-typeit sentences={sentences} loop={Loop.Once} animationLoopEnd={handleAnimationLoopEnd}>
+    Default text which shows up during loading...
+</wc-typeit>
 ```
