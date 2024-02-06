@@ -6,6 +6,8 @@ A very intelligent typewriter efect web component which can loop through an arra
 
 ## Installation
 
+### Package manager
+
 ```shell
 
 # with npm
@@ -14,6 +16,13 @@ npm i wc-typeit
 # with yarn
 yarn add wc-typeit
 
+```
+
+### CDN
+
+```html
+<script type="module" src="https://unpkg.com/wc-typeit@1.0.9/dist/wc-typeit/wc-typeit.esm.js"></script>
+<script nomodule src="https://unpkg.com/wc-typeit@1.0.9/dist/wc-typeit/wc-typeit.js"></script>
 ```
 
 ## Options
