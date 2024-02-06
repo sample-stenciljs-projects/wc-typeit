@@ -32,6 +32,12 @@ All methods need to be subscribed to to perform follow-up action
 | `start` | -      | Start the typewriter effect.                                            |
 | `stop`  | -      | Stop the typewriter effect. It stops upon completing one sentence cycle |
 
+## Events
+
+| Event              | Type                | Description                                                |
+| ------------------ | ------------------- | ---------------------------------------------------------- |
+| `animationLoopEnd` | `CustomEvent<void>` | An event which is emitted once an animation loop completes |
+
 ## Slottable
 
 This web component is slottable which means you can inject a starter text which should always be displayed on load and just once. It is totally optional.
