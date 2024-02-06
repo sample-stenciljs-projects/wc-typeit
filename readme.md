@@ -47,6 +47,44 @@ Just intall the package and start uning it as a custom web component
 import { Loop } from 'wc-typeit';
 .
 .
+const sentences = ['This is wc-typeit', 'It is EASY to USE!', 'It is EASY to INTEGRATE!', 'It is EASY to STYLE!'];
 .
-<wc-typeit sentences={['This is wc-typeit', 'It is EASY to USE!', 'It is EASY to INTEGRATE!', 'It is EASY to STYLE!']} loop={Loop.Once}>Default text which shows up during loading...</wc-typeit>
+.
+<wc-typeit sentences={sentences} loop={Loop.Once}>
+    Default text which shows up during loading...
+</wc-typeit>
+```
+
+### Methods
+
+One can get reference to the `wc-typeit` element and call start and stop methods on it
+
+```shell
+private ref: HTMLWcTypeitElement;
+.
+.
+private async startAnimation() {
+    try {
+        await this.ref.start();
+    }
+    catch {
+        console.error('Cannot start animation as it is already running');
+    }
+}
+
+private async stopAnimation() {
+    stopAnimation() {
+    this.ref.stop().then(() => {
+        // do your stuff once that round of animation stops
+    }).catch(() => {
+        console.error('Cannot stop animation as it is already stopped')
+    })
+  }
+}
+.
+.
+<wc-typeit sentences={sentences} loop={Loop.Once} ref={elem => this.ref = elem}>
+    Default text which shows up during loading...
+</wc-typeit>
+
 ```
