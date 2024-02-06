@@ -48,7 +48,7 @@ Just intall the package and start uning it as a custom web component
 
 ### Integration
 
-```shell
+```javascript
 import { Loop } from 'wc-typeit';
 .
 .
@@ -64,7 +64,7 @@ const sentences = ['This is wc-typeit', 'It is EASY to USE!', 'It is EASY to INT
 
 One can get reference to the `wc-typeit` element and call start and stop methods on it
 
-```shell
+```javascript
 private ref: HTMLWcTypeitElement;
 
 private async startAnimation() {
@@ -92,7 +92,7 @@ private async stopAnimation() {
 
 You can listen to `animationLoopEnd` method which fires whenever an animation loop showing all the sentences ends
 
-```shell
+```javascript
 private handleAnimationLoopEnd() {
     // your custom logic
 }
@@ -106,20 +106,20 @@ private handleAnimationLoopEnd() {
 
 This web component has no nested elements except the text node itself which makes styling it as east as styling any other element.
 
-```shell
+```css
 wc-typeit {
-    color: maroon;
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
-    width: 300px;
+  color: maroon;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+  width: 300px;
 }
 ```
 
 One can change the cursor color by applying the following styles
 
-```shell
+```css
 wc-typeit {
-    --cursor-color: green!important;
+  --cursor-color: green !important;
 }
 ```
