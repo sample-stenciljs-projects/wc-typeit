@@ -63,12 +63,11 @@ private ref: HTMLWcTypeitElement;
 .
 .
 private async startAnimation() {
-    try {
-        await this.ref.start();
-    }
-    catch {
-        console.error('Cannot start animation as it is already running');
-    }
+    this.ref.start().then(() => {
+        // your custom logic
+    }).catch(() => {
+        console.error('Cannot start animation as it is already running')
+    });
 }
 
 private async stopAnimation() {
