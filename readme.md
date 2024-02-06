@@ -104,3 +104,25 @@ private handleAnimationLoopEnd() {
     Default text which shows up during loading...
 </wc-typeit>
 ```
+
+## Styling
+
+This web component has no nested elements except the text node itself which makes styling it as east as styling any other element.
+
+```shell
+wc-typeit {
+    color: maroon;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    width: 300px;
+}
+```
+
+One can change the cursor color by applying the following styles
+
+```shell
+wc-typeit {
+    --cursor-color: green!important;
+}
+```
