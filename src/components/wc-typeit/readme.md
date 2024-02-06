@@ -15,9 +15,10 @@
 
 ## Events
 
-| Event           | Description | Type                |
-| --------------- | ----------- | ------------------- |
-| `animationStop` |             | `CustomEvent<void>` |
+| Event              | Description | Type                |
+| ------------------ | ----------- | ------------------- |
+| `animationLoopEnd` |             | `CustomEvent<void>` |
+| `animationStop`    |             | `CustomEvent<void>` |
 
 
 ## Methods

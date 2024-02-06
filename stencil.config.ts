@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 
 export const config: Config = {
   namespace: 'wc-typeit',
+  buildEs5: true,
   outputTargets: [
     {
       type: 'dist',
