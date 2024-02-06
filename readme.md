@@ -66,13 +66,12 @@ One can get reference to the `wc-typeit` element and call start and stop methods
 
 ```shell
 private ref: HTMLWcTypeitElement;
-.
-.
+
 private async startAnimation() {
     this.ref.start().then(() => {
         // your custom logic
     }).catch(() => {
-        console.error('Cannot start animation as it is already running')
+        console.error('Cannot start animation as it is already running');
     });
 }
 
@@ -80,12 +79,11 @@ private async stopAnimation() {
     this.ref.stop().then(() => {
         // your custom logic
     }).catch(() => {
-        console.error('Cannot stop animation as it is already stopped')
+        console.error('Cannot stop animation as it is already stopped');
     });
 }
-.
-.
-<wc-typeit sentences={sentences} loop={Loop.Once} ref={elem => this.ref = elem}>
+
+<wc-typeit sentences={this.sentences} loop={Loop.Once} ref={elem => this.ref = elem}>
     Default text which shows up during loading...
 </wc-typeit>
 ```
@@ -98,9 +96,8 @@ You can listen to `animationLoopEnd` method which fires whenever an animation lo
 private handleAnimationLoopEnd() {
     // your custom logic
 }
-.
-.
-<wc-typeit sentences={sentences} loop={Loop.Once} animationLoopEnd={handleAnimationLoopEnd}>
+
+<wc-typeit sentences={sentences} loop={Loop.Once} animationLoopEnd={this.handleAnimationLoopEnd}>
     Default text which shows up during loading...
 </wc-typeit>
 ```
