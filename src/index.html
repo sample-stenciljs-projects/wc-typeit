@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
-    <title>Stencil Component Starter</title>
+    <title>TypeIt Typewriter effect!</title>
 
     <script type="module" src="/build/wc-typeit.esm.js"></script>
     <script nomodule src="/build/wc-typeit.js"></script>
@@ -19,8 +19,8 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
-      wc-typeit::after {
-        color: black;
+      wc-typeit {
+        --cursor-color: green!important;
       }
     </style>
   </head>
@@ -29,9 +29,14 @@
   </body>
   <script>
     const typeitWidget = document.createElement('wc-typeit');
-    typeitWidget.innerText = 'This is the default text to be shown';
+    //typeitWidget.innerText = 'This is the default text to be shown just once';
     // typeitWidget.loop = 'Once'
-    typeitWidget.sentences = ['This is a sample', 'It can READ', 'It can WRITE', 'It can Excel'];
+    typeitWidget.sentences = [
+      'This is wc-typeit',
+      'It is EASY to USE!',
+      'It is EASY to INTEGRATE!',
+      'It is EASY to STYLE!',
+    ];
 
     // typeitWidget.addEventListener('animationLoopEnd', () => {
     //   console.log('animationLoopEnd');
