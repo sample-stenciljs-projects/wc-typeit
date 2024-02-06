@@ -21,6 +21,7 @@ export interface WcTypeitCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLWcTypeitElementEventMap {
+        "animationLoopEnd": void;
         "animationStop": void;
     }
     interface HTMLWcTypeitElement extends Components.WcTypeit, HTMLStencilElement {
@@ -44,6 +45,7 @@ declare global {
 declare namespace LocalJSX {
     interface WcTypeit {
         "loop"?: Loop;
+        "onAnimationLoopEnd"?: (event: WcTypeitCustomEvent<void>) => void;
         "onAnimationStop"?: (event: WcTypeitCustomEvent<void>) => void;
         "sentences"?: string[];
     }
