@@ -71,13 +71,11 @@ private async startAnimation() {
 }
 
 private async stopAnimation() {
-    stopAnimation() {
     this.ref.stop().then(() => {
-        // do your stuff once that round of animation stops
+        // your custom logic
     }).catch(() => {
         console.error('Cannot stop animation as it is already stopped')
-    })
-  }
+    });
 }
 .
 .
