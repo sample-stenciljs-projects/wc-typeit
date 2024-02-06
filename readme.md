@@ -1,4 +1,4 @@
-# Type It!
+# TypeIt typewriter effect!
 
 ![](demo.gif)
 
