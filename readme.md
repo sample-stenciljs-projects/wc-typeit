@@ -50,11 +50,9 @@ Just intall the package and start uning it as a custom web component
 
 ```javascript
 import { Loop } from 'wc-typeit';
-.
-.
+
 const sentences = ['This is wc-typeit', 'It is EASY to USE!', 'It is EASY to INTEGRATE!', 'It is EASY to STYLE!'];
-.
-.
+
 <wc-typeit sentences={sentences} loop={Loop.Once}>
     Default text which shows up during loading...
 </wc-typeit>
