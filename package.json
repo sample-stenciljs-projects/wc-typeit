@@ -15,6 +15,10 @@
     "url": "git@github.com:sample-stenciljs-projects/wc-typeit.git"
   },
   "keywords": [
+    "type",
+    "typewriter effect",
+    "stenciljs",
+    "stencil",
     "typewriter",
     "typing",
     "javascript",
