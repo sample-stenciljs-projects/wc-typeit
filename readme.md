@@ -2,7 +2,7 @@
 
 ![](demo.gif)
 
-A very intelligent typewriter efect web component which can loop through an array of sentences to render them as typewriter effect. It is smart enough to delete only necessessary characters instead of deleting all before rendering the next sentence.
+A very intelligent typewriter effect web component which can loop through an array of sentences to render them as typewriter effect. It is smart enough to delete only necessary characters instead of deleting all before rendering the next sentence.
 
 ## Installation
 
@@ -53,7 +53,7 @@ This web component is slottable which means you can inject a starter text which 
 
 ## Usage
 
-Just intall the package and start uning it as a custom web component
+Just install the package and start using it as a custom web component
 
 ### Integration
 
