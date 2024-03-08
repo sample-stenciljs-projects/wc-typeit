@@ -1,5 +1,6 @@
 :host {
   --cursor-color: #000000;
+  white-space: pre-wrap;
 }
 
 :host:after {
